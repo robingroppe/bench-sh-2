@@ -1,12 +1,13 @@
 #!/bin/bash
 #######################################################
-# FreeVPS Benchmark Script Version 2.0                #
+# Benchmark Script 2                                  #
 # By Hidden Refuge from FreeVPS                       #
-# Original script by dmmcinytre3 from FreeVPS         #
-# Original: https://freevps.us/thread-2252.html       #
+# Original script by akamaras/camarg                  #
+# Original: http://goo.gl/Zy7Jb1                      #
+# Original Copyright (C) 2011 by akamaras/camarg      # 
 # Copyright(C) 2015 - Hidden Refuge                   #
 # License: GNU General Public License 3.0             #
-# Github: https://github.com/hidden-refuge/fvps-bench #
+# Github: https://github.com/hidden-refuge/bench-sh-2 #
 #######################################################
 sysinfo () {
 	# Reading out system information...
