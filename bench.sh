@@ -13,6 +13,7 @@
 # Speedtest and I/O test were added by dmmcintyre3    #
 # from FreeVPS.us as modifications to the original    #
 # script.                                             #
+# Modded Script: https://freevps.us/thread-2252.html  # 
 # Copyright (C) 2011 by dmmcintyre3                   # 
 # for the modifications made by him                   #
 #######################################################
