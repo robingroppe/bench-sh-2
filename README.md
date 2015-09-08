@@ -1,5 +1,5 @@
-# fvps-bench
-FreeVPS Directory &amp; Discussion Benchmark Script Version 2.0<br /><br /><br />
+# bench-sh-2
+Benchmark Script Version 2<br /><br /><br />
 <strong>Parameters</strong><br /><br />
 System Info + Speedtest IPv4 + Drive Speed:<br />
 <code>./bench</code><br />
@@ -15,4 +15,7 @@ System Info:<br />
 System information only.<br /><br />
 Drive Speed:<br />
 <code>./bench -io</code><br />
-Drive speed test via DD only.
+Drive speed test via DD only.<br /><br /><br />
+<strong>This script is based on bench.sh by akamaras/camarg from <a href="http://www.akamaras.com/linux/linux-server-info-script/">here</a>.</strong><br />
+Copyright (C) 2011 by akamaras/camarg<br />
+Copyright for this (bench-sh-2) (C) 2015 by me (Hidden Refuge)
