@@ -5,11 +5,11 @@
 # Copyright(C) 2015 - Hidden Refuge                   #
 # License: GNU General Public License 3.0             #
 # Github: https://github.com/hidden-refuge/bench-sh-2 #
-#######################################################
-# Original script by akamaras/camarg                  #
-# Original: http://goo.gl/Zy7Jb1                      #
-# Original Copyright (C) 2011 by akamaras/camarg      #
-#######################################################
+#####################################################################
+# Original script by akamaras/camarg                                #
+# Original: http://www.akamaras.com/linux/linux-server-info-script/ #
+# Original Copyright (C) 2011 by akamaras/camarg                    #
+#####################################################################
 # Speedtest and I/O test were added by dmmcintyre3    #
 # from FreeVPS.us as modifications to the original    #
 # script.                                             #
