@@ -33,8 +33,6 @@ sysinfo () {
 	arch=$( uname -m ) # Architecture
 	lbit=$( getconf LONG_BIT ) # Architecture in Bit
 	hn=$( hostname ) # Hostname
-	ipiv=$( wget -qO- ipv4.icanhazip.com ) # Getting IPv4
-	ipvii=$( wget -qO- ipv6.icanhazip.com ) # Getting IPv6
 	# Output of results
 	echo "System Information"
 	echo "------------------"
@@ -54,9 +52,12 @@ sysinfo () {
 	echo ""
 }
 speedtest4 () {
+	ipiv=$( wget -qO- ipv4.icanhazip.com ) # Getting IPv4
 	# Speed test via wget for IPv4 only with 10x 100 MB files. 1 GB bandwidth will be used!
 	echo "Speedtest IPv4 only"
 	echo "-------------------"
+	echo "Your public IPv4 is $ipiv"
+	echo ""
 	# Cachefly CDN speed test
 	echo "CDN - nearest location:"
 	cachefly=$( wget -4 -O /dev/null http://cachefly.cachefly.net/100mb.test 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
@@ -92,9 +93,12 @@ speedtest4 () {
 	echo ""
 }
 speedtest6 () {
+	ipvii=$( wget -qO- ipv6.icanhazip.com ) # Getting IPv6
   	# Speed test via wget for IPv6 only with 10x 100 MB files. 1 GB bandwidth will be used! No CDN - Cachefly not IPv6 ready...
   	echo "Speedtest IPv6 only"
   	echo "-------------------"
+  	echo "Your public IPv6 is $ipvii"
+  	echo ""
   	# United States speed test
   	echo "America - United States:"
 	v6atl=$( wget -6 -O /dev/null http://speedtest.atlanta.linode.com/100MB-atlanta.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
