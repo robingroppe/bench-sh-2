@@ -139,7 +139,7 @@ iotest () {
 	echo "I/O (1st attempt): $io"
 	echo "I/O (2nd attempt): $io2"
 	echo "I/O (3rd attempt): $io3"
-	# Calculating avg I/O
+	# Calculating avg I/O (better approach with bc for non int values)
 	ioraw=$( echo $io | awk 'NR==1 {print $1}' )
 	ioraw2=$( echo $io2 | awk 'NR==1 {print $1}' )
 	ioraw3=$( echo $io3 | awk 'NR==1 {print $1}' )
