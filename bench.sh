@@ -46,8 +46,6 @@ sysinfo () {
 	echo "OS: $opsy"
 	echo "Arch: $arch ($lbit Bit)"
 	echo "Hostname: $hn"
-	echo "Public IPv4: $ipiv"
-	echo "Public IPv6: $ipvii"
 	echo ""
 	echo ""
 }
