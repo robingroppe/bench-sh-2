@@ -33,8 +33,8 @@ sysinfo () {
 	arch=$( uname -m ) # Architecture
 	lbit=$( getconf LONG_BIT ) # Architecture in Bit
 	hn=$( hostname ) # Hostname
-	ipiv=$( wget -qO- ipv4.icanhazip.com )
-	ipvii=$( wget -qO- ipv6.icanhazip.com )
+	ipiv=$( wget -qO- ipv4.icanhazip.com ) # Getting IPv4
+	ipvii=$( wget -qO- ipv6.icanhazip.com ) # Getting IPv6
 	# Output of results
 	echo "System Information"
 	echo "------------------"
