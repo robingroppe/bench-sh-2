@@ -634,8 +634,8 @@ the "copyright" line and a pointer to where the full notice is found.
     Benchmark Script
     Copyright (C) 2011 by akamaras/camarg (see http://www.akamaras.com/linux/linux-server-info-script/)
     
-    Speedtest and I/O test modifications by dmmcintyre3 (see https://freevps.us/thread-2252.html)
-    Copyright (C) 2011 by dmmcintyre3 for the modifications he made
+    Speed test modification by dmmcintyre3 (see https://freevps.us/thread-2252.html)
+    Copyright (C) 2011 by dmmcintyre3 for the modification
     
     Benchmark Script 2
     Copyright (C) 2015 by Hidden Refuge
@@ -659,7 +659,7 @@ Also add information on how to contact you by electronic and paper mail.
 notice like this when it starts in an interactive mode:
 
     Bench.sh  Copyright (C) 2011 by akamaras/camarg (see http://www.akamaras.com/linux/linux-server-info-script/)
-    Copyright (C) 2011 by dmmcintyre3 for the modifications he made (see https://freevps.us/thread-2252.html)
+    Copyright (C) 2011 by dmmcintyre3 for the modification (see https://freevps.us/thread-2252.html)
     Bench.sh 2 Copyright (C) 2015 by Hidden Refuge
     This program comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
     This is free software, and you are welcome to redistribute it
