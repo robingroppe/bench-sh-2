@@ -29,19 +29,27 @@ sysinfo () {
 	# Reading system uptime
 	up=$( uptime | awk '{ $1=$2=$(NF-6)=$(NF-5)=$(NF-4)=$(NF-3)=$(NF-2)=$(NF-1)=$NF=""; print }' )
 	# Reading operating system and version (simple, didn't filter the strings at the end...)
-	opsy=$( cat /etc/issue )
-	arch=$( uname -m )
-	lbit=$( getconf LONG_BIT )
+	opsy=$( cat /etc/issue ) # Operating System & Version
+	arch=$( uname -m ) # Architecture
+	lbit=$( getconf LONG_BIT ) # Architecture in Bit
+	hn=$( hostname ) # Hostname
+	ipiv=$( wget -qO- ipv4.icanhazip.com )
+	ipvii=$( wget -qO- ipv6.icanhazip.com )
 	# Output of results
-	echo "System Info:"
-	echo "CPU: $cname"
-	echo "Cores: $cores"
+	echo "System Information"
+	echo "------------------"
+	echo "Processor: $cname"
+	echo "CPU Cores: $cores"
 	echo "Frequency: $freq MHz"
 	echo "Memory: $tram MB"
 	echo "Swap: $vram MB"
 	echo "Uptime: $up"
+	echo ""
 	echo "OS: $opsy"
-	echo "Arch: $arch ($lbit Bit) "
+	echo "Arch: $arch ($lbit Bit)"
+	echo "Hostname: $hn"
+	echo "Public IPv4: $ipiv"
+	echo "Public IPv6: $ipvii"
 	echo ""
 	echo ""
 }
