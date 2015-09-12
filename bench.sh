@@ -143,8 +143,7 @@ iotest () {
 	ioraw=$( echo $io | awk 'NR==1 {print $1}' )
 	ioraw2=$( echo $io2 | awk 'NR==1 {print $1}' )
 	ioraw3=$( echo $io3 | awk 'NR==1 {print $1}' )
-	ioall=$( echo $ioraw + $ioraw2 + $ioraw3 | bc )
-	ioavg=$( echo "$ioall / 3" | bc )
+	ioavg=$( awk 'BEGIN{print '$ioraw' + '$ioraw2' + '$ioraw3' / 3}' )
 	echo "Average I/O: $ioavg MB/s"
 	echo ""
 }
