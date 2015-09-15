@@ -33,6 +33,7 @@ sysinfo () {
 	arch=$( uname -m ) # Architecture
 	lbit=$( getconf LONG_BIT ) # Architecture in Bit
 	hn=$( hostname ) # Hostname
+	kern=$( uname -r )
 	# Output of results
 	echo "System Information"
 	echo "------------------"
@@ -45,6 +46,7 @@ sysinfo () {
 	echo ""
 	echo "OS: $opsy"
 	echo "Arch: $arch ($lbit Bit)"
+	echo "Kernel: $kern"
 	echo "Hostname: $hn"
 	echo ""
 	echo ""
