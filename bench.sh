@@ -149,15 +149,14 @@ iotest () {
 	echo ""
 }
 gbench () {
-	cd $HOME
 	echo ""
-	echo "System Benchmark"
-	echo "----------------"
+	echo "System Benchmark (Experimental)"
+	echo "-------------------------------"
 	echo ""
 	echo "Note: The benchmark might not always work (eg: missing dependencies)."
-	echo "      If it's too quick or takes too long it most likely means that"
-	echo "      the benchmark has failed. Check $HOME/results.txt for possible"
-	echo "	    reasons of the failure."
+	echo "If it's too quick or takes too long it most likely means that the"
+	echo "benchmark has failed. Check $HOME/results.txt for possible reasons of"
+	echo "the failure."
 	echo ""
 	echo "Downloading Geekbench 3.3.2"
 	wget http://geekbench.s3.amazonaws.com/Geekbench-3.3.2-Linux.tar.gz -O $HOME/Geekbench-3.3.2-Linux.tar.gz > /dev/null 2>&1
@@ -168,8 +167,10 @@ gbench () {
 	echo "The system benchmark with Geekbench may take a while."
 	echo "Don't close your terminal/SSH session!"
 	echo "All output is redirected into a result file."
+	sleep 2
 	$HOME/dist/Geekbench-3.3.2-Linux/geekbench_x86_32 > $HOME/results.txt
 	echo "Finished. Removing Geekbench files"
+	sleep 1
 	rm -rf $HOME/dist/ $HOME/Geekbench-3.3.2-Linux.tar.gz
 	echo ""
 	gbl=$( cat $HOME/results.txt | awk 'NR==77 {print}')
