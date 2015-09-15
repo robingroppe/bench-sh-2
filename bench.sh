@@ -148,7 +148,7 @@ iotest () {
 	echo "Average I/O: $ioavg MB/s"
 	echo ""
 }
-gbench {
+gbench () {
 	cd $HOME
 	echo ""
 	echo "System Benchmark"
