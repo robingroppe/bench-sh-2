@@ -148,6 +148,35 @@ iotest () {
 	echo "Average I/O: $ioavg MB/s"
 	echo ""
 }
+gbench {
+	cd $HOME
+	echo ""
+	echo "System Benchmark"
+	echo "----------------"
+	echo ""
+	echo "Note: The benchmark might not always work (eg: missing dependencies)."
+	echo "      If it's too quick or takes too long it most likely means that"
+	echo "      the benchmark has failed. Check $HOME/results.txt for possible"
+	echo "	    reasons of the failure."
+	echo ""
+	echo "Downloading Geekbench 3.3.2"
+	wget http://geekbench.s3.amazonaws.com/Geekbench-3.3.2-Linux.tar.gz -O $HOME/Geekbench-3.3.2-Linux.tar.gz > /dev/null 2>&1
+	echo "Extracting Geekbench 3.3.2"
+	tar xvzf $HOME/Geekbench-3.3.2-Linux.tar.gz > /dev/null 2>&1
+	echo ""
+	echo "Starting Geekbench 3.3.2"
+	echo "The system benchmark with Geekbench may take a while."
+	echo "Don't close your terminal/SSH session!"
+	echo "All output is redirected into a result file."
+	$HOME/dist/Geekbench-3.3.2-Linux/geekbench_x86_32 > $HOME/results.txt
+	echo "Finished. Removing Geekbench files"
+	rm -rf $HOME/dist/ $HOME/Geekbench-3.3.2-Linux.tar.gz
+	echo ""
+	gbl=$( cat $HOME/results.txt | awk 'NR==77 {print}')
+	echo "Benchmark Results: $gbl"
+	echo "Full report available at $HOME/results.txt"
+	echo ""
+}
 case $1 in
 	'-sysinfo')
 		sysinfo;;
@@ -157,6 +186,12 @@ case $1 in
 		sysinfo; speedtest6; iotest;;
 	'-46' )
 		sysinfo; speedtest4; speedtest6; iotest;;
+	'-b' )
+		sysinfo; speedtest4; iotest; gbench;;
+	'-b6' )
+		sysinfo; speedtest6; iotest; gbench;;
+	'-b46' )
+		sysinfo; speedtest4; speedtest6; iotest; gbench;;
 	*)
 		sysinfo; speedtest4; iotest;;
 esac
