@@ -15,6 +15,8 @@
 # Copyright (C) 2011 by dmmcintyre3 for the modification            #
 #####################################################################
 sysinfo () {
+	# Removing existing bench.log
+	rm -rf $HOME/bench.log
 	# Reading out system information...
 	# Reading CPU model
 	cname=$( awk -F: '/model name/ {name=$2} END {print name}' /proc/cpuinfo )
