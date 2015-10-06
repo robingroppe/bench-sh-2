@@ -177,8 +177,8 @@ gbench () {
 	echo "Don't close your terminal/SSH session!" | tee -a $HOME/bench.log
 	echo "All output is redirected into a result file." | tee -a $HOME/bench.log
 	sleep 2
-	$HOME/dist/$gb_noext/geekbench_x86_32 | tee -a $HOME/bench.log
-	echo "Finished. Removing Geekbench files" >> $HOME/bench.log
+	$HOME/dist/$gb_noext/geekbench_x86_32 >> $HOME/bench.log
+	echo "Finished. Removing Geekbench files" | tee -a $HOME/bench.log
 	sleep 1
 	rm -rf $HOME/dist/
 	echo "" | tee -a $HOME/bench.log
