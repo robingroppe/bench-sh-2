@@ -180,6 +180,7 @@ gbench () {
 	echo "The system benchmark with Geekbench may take a while." | tee -a $HOME/bench.log
 	echo "Don't close your terminal/SSH session!" | tee -a $HOME/bench.log
 	echo "All output is redirected into a result file." | tee -a $HOME/bench.log
+	echo "" >> $HOME/bench.log
 	echo "--- Geekbench Results ---" >> $HOME/bench.log
 	sleep 2
 	$HOME/dist/$gb_noext/geekbench_x86_32 >> $HOME/bench.log
