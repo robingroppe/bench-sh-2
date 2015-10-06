@@ -36,8 +36,12 @@ sysinfo () {
 	lbit=$( getconf LONG_BIT ) # Architecture in Bit
 	hn=$( hostname ) # Hostname
 	kern=$( uname -r )
+	# Date of benchmark
+	bdates=$( date )
+	echo "Benchmark started on $bdates" | tee -a $HOME/bench.log
+	echo "" | tee -a $HOME/bench.log
 	# Output of results
-	echo "System Information" | tee $HOME/bench.log
+	echo "System Information" | tee -a $HOME/bench.log
 	echo "------------------" | tee -a $HOME/bench.log
 	echo "Processor: $cname" | tee -a $HOME/bench.log
 	echo "CPU Cores: $cores" | tee -a $HOME/bench.log
@@ -176,8 +180,11 @@ gbench () {
 	echo "The system benchmark with Geekbench may take a while." | tee -a $HOME/bench.log
 	echo "Don't close your terminal/SSH session!" | tee -a $HOME/bench.log
 	echo "All output is redirected into a result file." | tee -a $HOME/bench.log
+	echo "--- Geekbench Results ---" >> $HOME/bench.log
 	sleep 2
 	$HOME/dist/$gb_noext/geekbench_x86_32 >> $HOME/bench.log
+	echo "--- Geekbench Results End ---" >> $HOME/bench.log
+	echo "" >> $HOME/bench.log
 	echo "Finished. Removing Geekbench files" | tee -a $HOME/bench.log
 	sleep 1
 	rm -rf $HOME/dist/
