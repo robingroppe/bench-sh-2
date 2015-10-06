@@ -151,31 +151,35 @@ iotest () {
 	echo ""
 }
 gbench () {
+	# Improved version of my code by thirthy_speed https://freevps.us/thread-16943-post-191398.html#pid191398
 	echo ""
 	echo "System Benchmark (Experimental)"
 	echo "-------------------------------"
 	echo ""
 	echo "Note: The benchmark might not always work (eg: missing dependencies)."
 	echo "If it's too quick or takes too long it most likely means that the"
-	echo "benchmark has failed. Check $HOME/results.txt for possible reasons of"
-	echo "the failure."
+	echo "benchmark has failed."
 	echo ""
-	echo "Downloading Geekbench 3.3.2"
-	wget http://geekbench.s3.amazonaws.com/Geekbench-3.3.2-Linux.tar.gz -O $HOME/Geekbench-3.3.2-Linux.tar.gz > /dev/null 2>&1
-	echo "Extracting Geekbench 3.3.2"
-	tar xvzf $HOME/Geekbench-3.3.2-Linux.tar.gz > /dev/null 2>&1
+        gb_page=http://www.primatelabs.com/geekbench/download/linux/
+        gb_dl=$(wget -qO - $gb_page | \ sed -n 's/.*\(https\?:[^:]*\.tar\.gz\).*/\1/p')
+        gb_noext=${gb_dl##*/}
+        gb_noext=${gb_noext%.tar.gz} 
+        gb_name=${gb_noext//-/ }
+	echo "File is located at $gb_dl"
+	echo "Downloading and extracting $gb_name"
+        wget -qO - "$gb_dl" | tar xzv 2>&1 >/dev/null
 	echo ""
-	echo "Starting Geekbench 3.3.2"
+	echo "Starting $gb_name"
 	echo "The system benchmark with Geekbench may take a while."
 	echo "Don't close your terminal/SSH session!"
 	echo "All output is redirected into a result file."
 	sleep 2
-	$HOME/dist/Geekbench-3.3.2-Linux/geekbench_x86_32 > $HOME/results.txt
+	$HOME/dist/$gb_noext/geekbench_x86_32 > $HOME/results.txt
 	echo "Finished. Removing Geekbench files"
 	sleep 1
-	rm -rf $HOME/dist/ $HOME/Geekbench-3.3.2-Linux.tar.gz
+	rm -rf $HOME/dist/
 	echo ""
-	gbl=$( cat $HOME/results.txt | awk 'NR==77 {print}')
+        gbl=$(sed -n '/following link/,/following link/ {/following link\|^$/b; p}' $HOME/results.txt)
 	echo "Benchmark Results: $gbl"
 	echo "Full report available at $HOME/results.txt"
 	echo ""
@@ -198,3 +202,8 @@ case $1 in
 	*)
 		sysinfo; speedtest4; iotest;;
 esac
+#################################################################################
+# Contributors									#
+#-------------------------------------------------------------------------------#
+# thirthy_speed https://freevps.us/thread-16943-post-191398.html#pid191398 	#
+#################################################################################
