@@ -161,7 +161,8 @@ gbench () {
 	echo "benchmark has failed."
 	echo ""
         gb_page=http://www.primatelabs.com/geekbench/download/linux/
-        gb_dl=$(wget -qO - $gb_page | \ sed -n 's/.*\(https\?:[^:]*\.tar\.gz\).*/\1/p')
+        gb_dl=$(wget -qO - $gb_page | \
+                 sed -n 's/.*\(https\?:[^:]*\.tar\.gz\).*/\1/p')
         gb_noext=${gb_dl##*/}
         gb_noext=${gb_noext%.tar.gz} 
         gb_name=${gb_noext//-/ }
