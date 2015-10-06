@@ -39,6 +39,7 @@ sysinfo () {
 	# Date of benchmark
 	bdates=$( date )
 	echo "Benchmark started on $bdates" | tee -a $HOME/bench.log
+	echo "Full benchmark log: $HOME/bench.log" | tee -a $HOME/bench.log
 	echo "" | tee -a $HOME/bench.log
 	# Output of results
 	echo "System Information" | tee -a $HOME/bench.log
