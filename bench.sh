@@ -142,6 +142,19 @@ iotest () {
 	io=$( ( dd if=/dev/zero of=test_$$ bs=64k count=16k conv=fdatasync && rm -f test_$$ ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
 	io2=$( ( dd if=/dev/zero of=test_$$ bs=64k count=16k conv=fdatasync && rm -f test_$$ ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
 	io3=$( ( dd if=/dev/zero of=test_$$ bs=64k count=16k conv=fdatasync && rm -f test_$$ ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
+	# Measuring IOPing
+	wget --no-check-certificate -O $HOME/ioping https://hiddenrefuge.eu.org/stuff/ioping &> /dev/null
+	chmod +x $HOME/ioping
+	lata=$( $HOME/ioping -qAc 10 . )
+	latd=$( $HOME/ioping -qDc 10 . )
+	latc=$( $HOME/ioping -qCc 10 . )
+	seraa=$( $HOME/ioping -RA . )
+	serad=$( $HOME/ioping -RD . )
+	serac=$( $HOME/ioping -RC . )
+	seqraa=$( $HOME/ioping -RLA . )
+	seqrad=$( $HOME/ioping -RLD . )
+	seqrac=$( $HOME/ioping -RLC . )
+	rm -rf $HOME/ioping
 	# Output of DD result
 	echo "Drive Speed:" | tee -a $HOME/bench.log
 	echo "------------" | tee -a $HOME/bench.log
@@ -155,6 +168,37 @@ iotest () {
 	ioall=$( awk 'BEGIN{print '$ioraw' + '$ioraw2' + '$ioraw3'}' )
 	ioavg=$( awk 'BEGIN{print '$ioall'/3}' )
 	echo "Average I/O: $ioavg MB/s" | tee -a $HOME/bench.log
+	echo "" | tee -a $HOME/bench.log
+	# Output of IOPing
+	echo "" | tee -a $HOME/bench.log
+	echo "IOPing Results:" | tee -a $HOME/bench.log
+	echo "---------------" | tee -a $HOME/bench.log
+	echo "Latency (Async):" | tee -a $HOME/bench.log
+	echo "$lata" | tee -a $HOME/bench.log
+	echo "" | tee -a $HOME/bench.log
+	echo "Latency (Direct):" | tee -a $HOME/bench.log
+	echo "$latd" | tee -a $HOME/bench.log
+	echo "" | tee -a $HOME/bench.log
+	echo "Latency (Cache):" | tee -a $HOME/bench.log
+	echo "$latc" | tee -a $HOME/bench.log
+	echo "" | tee -a $HOME/bench.log
+	echo "Seek Rate (Async):" | tee -a $HOME/bench.log
+	echo "$seraa" | tee -a $HOME/bench.log
+	echo "" | tee -a $HOME/bench.log
+	echo "Seek Rate (Direct):" | tee -a $HOME/bench.log
+	echo "$serad" | tee -a $HOME/bench.log
+	echo "" | tee -a $HOME/bench.log
+	echo "Seek Rate (Cache):" | tee -a $HOME/bench.log
+	echo "$serac" | tee -a $HOME/bench.log
+	echo "" | tee -a $HOME/bench.log
+	echo "Sequential Speed (Async):" | tee -a $HOME/bench.log
+	echo "$seqraa" | tee -a $HOME/bench.log
+	echo "" | tee -a $HOME/bench.log
+	echo "Sequential Speed (Direct):" | tee -a $HOME/bench.log
+	echo "$seqrad" | tee -a $HOME/bench.log
+	echo "" | tee -a $HOME/bench.log
+	echo "Sequential Speed (Cache):" | tee -a $HOME/bench.log
+	echo "$seqrac" | tee -a $HOME/bench.log
 	echo "" | tee -a $HOME/bench.log
 }
 gbench () {
