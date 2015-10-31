@@ -29,7 +29,7 @@ sysinfo () {
 	# Reading Swap in MB
 	vram=$( free -m | awk 'NR==4 {print $2}' )
 	# Reading system uptime
-	up=$( uptime | awk '{ $1=$2=$(NF-6)=$(NF-5)=$(NF-4)=$(NF-3)=$(NF-2)=$(NF-1)=$NF=""; print }' | )
+	up=$( uptime | awk '{ $1=$2=$(NF-6)=$(NF-5)=$(NF-4)=$(NF-3)=$(NF-2)=$(NF-1)=$NF=""; print }' | sed 's/^[ \t]*//;s/[ \t]*$//' )
 	# Reading operating system and version (simple, didn't filter the strings at the end...)
 	opsy=$( cat /etc/issue.net | awk 'NR==1 {print}' ) # Operating System & Version
 	arch=$( uname -m ) # Architecture
