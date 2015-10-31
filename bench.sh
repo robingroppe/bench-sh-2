@@ -42,8 +42,8 @@ sysinfo () {
 	echo "Full benchmark log: $HOME/bench.log" | tee -a $HOME/bench.log
 	echo "" | tee -a $HOME/bench.log
 	# Output of results
-	echo "System Information" | tee -a $HOME/bench.log
-	echo "------------------" | tee -a $HOME/bench.log
+	echo "System Info" | tee -a $HOME/bench.log
+	echo "-----------" | tee -a $HOME/bench.log
 	echo "Processor: $cname" | tee -a $HOME/bench.log
 	echo "CPU Cores: $cores" | tee -a $HOME/bench.log
 	echo "Frequency: $freq MHz" | tee -a $HOME/bench.log
