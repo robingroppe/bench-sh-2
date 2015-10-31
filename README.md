@@ -1,5 +1,6 @@
 # bench-sh-2
-Benchmark Script Version 2<br /><br /><br />
+Benchmark Script Version 2<br /><br />
+Demo Output: http://pastebin.com/pNXGSrr8<br /><br /><br />
 <strong>Parameters</strong><br /><br />
 System Info + Speedtest IPv4 + Drive Speed:<br />
 <code>./bench</code><br />
