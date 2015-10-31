@@ -8,10 +8,10 @@ System Info + Speedtest IPv6 + Drive Speed:<br />
 <code>./bench -6</code><br />
 IPv6 only speed test. This will use 1 GB bandwidth!<br /><br />
 System Info + Speedtest IPv4 & IPv6 + Drive Speed:<br />
-<code>./bench -46</code><br />
+<code>./bench -46 or ./bench -64</code><br />
 Dual stack speed test. This will use 2 GB bandwidth!<br /><br />
 System Info:<br />
-<code>./bench -sysinfo</code><br />
+<code>./bench -sys</code><br />
 System information only.<br /><br />
 Drive Speed:<br />
 <code>./bench -io</code><br />
@@ -23,7 +23,7 @@ System Info + Speedtest IPv6 + Drive Speed + System Benchmark:<br />
 <code>./bench -b6</code><br />
 IPv6 only speed test with system benchmark. This will use 1 GB bandwidth!<br /><br />
 System Info + Speedtest IPv4 & IPv6 + Drive Speed + System Benchmark:<br />
-<code>./bench -b46</code><br />
+<code>./bench -b46 or ./bench -b64</code><br />
 Dual stack speed test with system benchmark. This will use 2 GB bandwidth.<br /><br /><br />
 <strong>This script is based on bench.sh by akamaras/camarg from <a href="http://www.akamaras.com/linux/linux-server-info-script/">here</a>.</strong><br />
 Copyright (C) 2011 by akamaras/camarg<br /><br />
