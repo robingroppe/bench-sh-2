@@ -151,6 +151,8 @@ iotest () {
 	echo "I/O (3rd run)	: $io3" | tee -a $HOME/bench.log
 	echo "Average I/O	: $ioavg MB/s" | tee -a $HOME/bench.log
 	echo "" | tee -a $HOME/bench.log
+}
+ioptest () {
 	echo "" | tee -a $HOME/bench.log
 	echo "IOPing Benchmark Results" | tee -a $HOME/bench.log
 	echo "------------------------" | tee -a $HOME/bench.log
@@ -273,6 +275,8 @@ case $1 in
 		sysinfo;;
 	'-io')
 		iotest;;
+	'-iops')
+		ioptest;;
 	'-6' )
 		sysinfo; speedtest6; iotest;;
 	'-46' )
