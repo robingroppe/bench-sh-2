@@ -258,6 +258,7 @@ hlp () {
 	echo "No option	: System information, IPv4 only speedtest and disk speed & IOPing benchmark will be run."
 	echo "-sys		: Displays system information such as CPU, amount CPU cores, RAM and more."
 	echo "-io		: Runs a disk speed test and a IOPing benchmark and displays the results."
+	echo "-iops		: Runs a extended IOPing test for latency, reading and et cetera."
 	echo "-6		: Normal benchmark but with a IPv6 only speedtest (run when you have IPv6)."
 	echo "-46		: Normal benchmark with IPv4 and IPv6 speedtest."
 	echo "-64		: Same as above."
