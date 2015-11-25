@@ -157,7 +157,11 @@ ioptest () {
 	echo "IOPing Benchmark Results" | tee -a $HOME/bench.log
 	echo "------------------------" | tee -a $HOME/bench.log
 	# Measuring IOPing
-	wget --no-check-certificate -O $HOME/ioping https://hiddenrefuge.eu.org/stuff/ioping &> /dev/null
+	if  [ $lbit == 32 ]; then
+		wget --no-check-certificate -O $HOME/ioping https://hiddenrefuge.eu.org/stuff/ioping32 &> /dev/null
+	else
+		wget --no-check-certificate -O $HOME/ioping https://hiddenrefuge.eu.org/stuff/ioping64 &> /dev/null
+	fi
 	chmod +x $HOME/ioping
 	lata=$( $HOME/ioping -qAc 10 . )
 	latd=$( $HOME/ioping -qDc 10 . )
