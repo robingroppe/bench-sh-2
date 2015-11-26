@@ -152,68 +152,6 @@ iotest () {
 	echo "Average I/O	: $ioavg MB/s" | tee -a $HOME/bench.log
 	echo "" | tee -a $HOME/bench.log
 }
-ioptest () {
-	echo "" | tee -a $HOME/bench.log
-	echo "IOPing Benchmark Results" | tee -a $HOME/bench.log
-	echo "------------------------" | tee -a $HOME/bench.log
-	# Measuring IOPing
-	if  [ "$lbit" = "32" ]; then
-		wget --no-check-certificate -O $HOME/ioping https://hiddenrefuge.eu.org/stuff/ioping32 &> /dev/null
-	else
-		wget --no-check-certificate -O $HOME/ioping https://hiddenrefuge.eu.org/stuff/ioping64 &> /dev/null
-	fi
-	chmod +x $HOME/ioping
-	lata=$( $HOME/ioping -qAc 10 . )
-	latd=$( $HOME/ioping -qDc 10 . )
-	latc=$( $HOME/ioping -qCc 10 . )
-	seraa=$( $HOME/ioping -RA . )
-	serad=$( $HOME/ioping -RD . )
-	serac=$( $HOME/ioping -RC . )
-	seqraa=$( $HOME/ioping -RLA . )
-	seqrad=$( $HOME/ioping -RLD . )
-	seqrac=$( $HOME/ioping -RLC . )
-	rm -rf $HOME/ioping
-	# Output of IOPing
-	echo "" | tee -a $HOME/bench.log
-	echo "Latency (Async):" | tee -a $HOME/bench.log
-	echo "$lata" | tee -a $HOME/bench.log
-	echo "------------------------" | tee -a $HOME/bench.log
-	echo "" | tee -a $HOME/bench.log
-	echo "Latency (Direct):" | tee -a $HOME/bench.log
-	echo "$latd" | tee -a $HOME/bench.log
-	echo "------------------------" | tee -a $HOME/bench.log
-	echo "" | tee -a $HOME/bench.log
-	echo "Latency (Cache):" | tee -a $HOME/bench.log
-	echo "$latc" | tee -a $HOME/bench.log
-	echo "------------------------" | tee -a $HOME/bench.log
-	echo "" | tee -a $HOME/bench.log
-	echo "" | tee -a $HOME/bench.log
-	echo "Seek Rate (Async):" | tee -a $HOME/bench.log
-	echo "$seraa" | tee -a $HOME/bench.log
-	echo "------------------------" | tee -a $HOME/bench.log
-	echo "" | tee -a $HOME/bench.log
-	echo "Seek Rate (Direct):" | tee -a $HOME/bench.log
-	echo "$serad" | tee -a $HOME/bench.log
-	echo "------------------------" | tee -a $HOME/bench.log
-	echo "" | tee -a $HOME/bench.log
-	echo "Seek Rate (Cache):" | tee -a $HOME/bench.log
-	echo "$serac" | tee -a $HOME/bench.log
-	echo "------------------------" | tee -a $HOME/bench.log
-	echo "" | tee -a $HOME/bench.log
-	echo "" | tee -a $HOME/bench.log
-	echo "Sequential Speed (Async):" | tee -a $HOME/bench.log
-	echo "$seqraa" | tee -a $HOME/bench.log
-	echo "------------------------" | tee -a $HOME/bench.log
-	echo "" | tee -a $HOME/bench.log
-	echo "Sequential Speed (Direct):" | tee -a $HOME/bench.log
-	echo "$seqrad" | tee -a $HOME/bench.log
-	echo "------------------------" | tee -a $HOME/bench.log
-	echo "" | tee -a $HOME/bench.log
-	echo "Sequential Speed (Cache):" | tee -a $HOME/bench.log
-	echo "$seqrac" | tee -a $HOME/bench.log
-	echo "------------------------" | tee -a $HOME/bench.log
-	echo "" | tee -a $HOME/bench.log
-}
 gbench () {
 	# Improved version of my code by thirthy_speed https://freevps.us/thread-16943-post-191398.html#pid191398
 	echo "" | tee -a $HOME/bench.log
@@ -280,8 +218,6 @@ case $1 in
 		sysinfo;;
 	'-io')
 		iotest;;
-	'-iops')
-		ioptest;;
 	'-6' )
 		sysinfo; speedtest6; iotest;;
 	'-46' )
