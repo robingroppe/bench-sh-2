@@ -19,8 +19,6 @@ System information only.<br /><br />
 Drive Speed:<br />
 <code>./bench.sh -io</code><br />
 Drive speed test via DD only.<br /><br />
-IOPing Benchmark:<br />
-<code>./bench.sh -iops</code><br /><br />
 System Info + Speedtest IPv4 + Drive Speed + System Benchmark:<br />
 <code>./bench.sh -b</code><br />
 Classic mode with system benchmark. This will use 1 GB bandwidth!<br /><br />
