@@ -1,9 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #####################################################################
 # Benchmark Script 2 by Hidden Refuge from FreeVPS                  #
 # Copyright(C) 2015 - Hidden Refuge                                 #
 # License: GNU General Public License 3.0                           #
 # Github: https://github.com/hidden-refuge/bench-sh-2               #
+# More European Mirrors and Pingcheck added by Robin Groppe	    #
 #####################################################################
 # Original script by akamaras/camarg                                #
 # Original: http://www.akamaras.com/linux/linux-server-info-script/ #
@@ -11,7 +12,7 @@
 #####################################################################
 # The speed test was added by dmmcintyre3 from FreeVPS.us as a      #
 # modification to the original script.                              #
-# Modded Script: https://freevps.us/thread-2252.html                # 
+# Modded Script: https://freevps.us/thread-2252.html                #
 # Copyright (C) 2011 by dmmcintyre3 for the modification            #
 #####################################################################
 sysinfo () {
@@ -66,33 +67,55 @@ speedtest4 () {
 	echo "Your public IPv4 is $ipiv" | tee -a $HOME/bench.log
 	echo "" | tee -a $HOME/bench.log
 	# Cachefly CDN speed test
-	echo "Location		Provider	Speed"	| tee -a $HOME/bench.log
+	echo "Location		Provider	Speed		Ping"	| tee -a $HOME/bench.log
 	cachefly=$( wget -4 -O /dev/null http://cachefly.cachefly.net/100mb.test 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
-	echo "CDN			Cachefly	$cachefly" | tee -a $HOME/bench.log
+	pingcachefly=$( ping -c 5 cachefly.cachefly.net | awk -F '/' 'END {print $5}' )
+	echo "CDN			Cachefly	$cachefly	$pingcachefly ms " | tee -a $HOME/bench.log
 	echo "" | tee -a $HOME/bench.log
 	# United States speed test
 	coloatatl=$( wget -4 -O /dev/null http://speed.atl.coloat.com/100mb.test 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
-	echo "Atlanta, GA, US		Coloat		$coloatatl " | tee -a $HOME/bench.log
+	pingcoloatl=$( ping -c 5 speed.atl.coloat.com | awk -F '/' 'END {print $5}' )
+	echo "Atlanta, GA, US		Coloat		$coloatatl 	$pingcoloatl ms " | tee -a $HOME/bench.log
 	sldltx=$( wget -4 -O /dev/null http://speedtest.dal05.softlayer.com/downloads/test100.zip 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
-	echo "Dallas, TX, US		Softlayer	$sldltx " | tee -a $HOME/bench.log
+	pingsldltx=$( ping -c 5 speedtest.dal05.softlayer.com | awk -F '/' 'END {print $5}' )
+	echo "Dallas, TX, US		Softlayer	$sldltx 	$pingsldltx ms " | tee -a $HOME/bench.log
 	slwa=$( wget -4 -O /dev/null http://speedtest.sea01.softlayer.com/downloads/test100.zip 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
-	echo "Seattle, WA, US		Softlayer	$slwa " | tee -a $HOME/bench.log
+	pingslwa=$( ping -c 5 speedtest.sea01.softlayer.com | awk -F '/' 'END {print $5}' )
+	echo "Seattle, WA, US		Softlayer	$slwa 	$pingslwa ms " | tee -a $HOME/bench.log
 	slsjc=$( wget -4 -O /dev/null http://speedtest.sjc01.softlayer.com/downloads/test100.zip 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
-	echo "San Jose, CA, US	Softlayer	$slsjc " | tee -a $HOME/bench.log
+	pingslsjc=$( ping -c 5 speedtest.sjc01.softlayer.com | awk -F '/' 'END {print $5}' )
+	echo "San Jose, CA, US	Softlayer	$slsjc	$pingslsjc ms " | tee -a $HOME/bench.log
 	slwdc=$( wget -4 -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test100.zip 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
-	echo "Washington, DC, US	Softlayer 	$slwdc " | tee -a $HOME/bench.log
+	pingslwdc=$( ping -c 5 speedtest.wdc01.softlayer.com | awk -F '/' 'END {print $5}' )
+	echo "Washington, DC, US	Softlayer 	$slwdc	$pingslwdc ms " | tee -a $HOME/bench.log
 	echo "" | tee -a $HOME/bench.log
 	# Asia speed test
 	linodejp=$( wget -4 -O /dev/null http://speedtest.tokyo.linode.com/100MB-tokyo.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
-	echo "Tokyo, Japan		Linode		$linodejp " | tee -a $HOME/bench.log
+	pinglinodejp=$( ping -c 5 speedtest.tokyo.linode.com | awk -F '/' 'END {print $5}' )
+	echo "Tokyo, Japan		Linode		$linodejp 	$pinglinodejp ms " | tee -a $HOME/bench.log
 	slsg=$( wget -4 -O /dev/null http://speedtest.sng01.softlayer.com/downloads/test100.zip 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
-	echo "Singapore 		Softlayer	$slsg " | tee -a $HOME/bench.log
+	pingslsg=$( ping -c 5 speedtest.sng01.softlayer.com | awk -F '/' 'END {print $5}' )
+	echo "Singapore 		Softlayer	$slsg	$pingslsg ms " | tee -a $HOME/bench.log
 	echo "" | tee -a $HOME/bench.log
 	# Europe speed test
 	i3d=$( wget -4 -O /dev/null http://mirror.i3d.net/100mb.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
-	echo "Rotterdam, Netherlands	id3.net		$i3d" | tee -a $HOME/bench.log
+	pingi3d=$( ping -c 5 mirror.i3d.net | awk -F '/' 'END {print $5}' )
+	echo "Rotterdam, Netherlands	id3.net		$i3d	$pingi3d ms " | tee -a $HOME/bench.log
 	leaseweb=$( wget -4 -O /dev/null http://mirror.leaseweb.com/speedtest/100mb.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
-	echo "Haarlem, Netherlands	Leaseweb	$leaseweb " | tee -a $HOME/bench.log
+	pingleaseweb=$( ping -c 5 mirror.leaseweb.com | awk -F '/' 'END {print $5}' )
+	echo "Haarlem, Netherlands	Leaseweb	$leaseweb 	$pingleaseweb ms " | tee -a $HOME/bench.log
+	ovh=$( wget -4 -O /dev/null http://ovh.net/files/100Mb.dat 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
+	pingovh=$( ping -c 5 mirror.ovh.net | awk -F '/' 'END {print $5}' ) #ovh.net not accepting ping
+	echo "Strasbourg, France 	OVH		$ovh	$pingovh ms " | tee -a $HOME/bench.log
+	hetzner=$( wget -4 -O /dev/null http://speed.hetzner.de/100MB.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
+	pinghetzner=$( ping -c 5 speed.hetzner.de | awk -F '/' 'END {print $5}' )
+	echo "Falkenstein, Germany 	Hetzner		$hetzner 	$pinghetzner ms " | tee -a $HOME/bench.log
+	myloc=$( wget -4 -O /dev/null http://speed.myloc.de/100MB.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
+	pingmyloc=$( ping -c 5 speed.myloc.de | awk -F '/' 'END {print $5}' )
+	echo "Duesseldorf, Germany 	MyLoc		$myloc	$pingmyloc ms " | tee -a $HOME/bench.log
+	netcologne=$( wget -4 -O /dev/null http://speedtest.netcologne.de/test_100mb.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
+	pingnetcologne=$( ping -c 5 speedtest.netcologne.de | awk -F '/' 'END {print $5}' )
+	echo "Koeln, Germany 		NetCologne	$netcologne	$pingnetcologne ms " | tee -a $HOME/bench.log
 	echo "" | tee -a $HOME/bench.log
 	echo "" | tee -a $HOME/bench.log
 }
@@ -129,6 +152,14 @@ speedtest6 () {
 	echo "London, UK		Linode		$v6lon" | tee -a $HOME/bench.log
         v6har=$( wget -6 -O /dev/null http://mirror.nl.leaseweb.net/speedtest/100mb.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
         echo "Haarlem, Netherlands	Leaseweb	$v6har" | tee -a $HOME/bench.log
+	v6ovh=$( wget -6 -O /dev/null http://ovh.net/files/100Mb.dat 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
+	echo "Strasbourg, France 	OVH		$v6ovh " | tee -a $HOME/bench.log
+	v6hetzner=$( wget -6 -O /dev/null http://speed.hetzner.de/100MB.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
+	echo "Falkenstein, Germany 	Hetzner		$v6hetzner " | tee -a $HOME/bench.log
+	v6myloc=$( wget -6 -O /dev/null http://speed.myloc.de/100MB.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
+	echo "Duesseldorf, Germany 	MyLoc		$v6myloc " | tee -a $HOME/bench.log
+	v6netcologne=$( wget -6 -O /dev/null http://speed.myloc.de/100MB.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
+	echo "Koeln, Germany 		NetCologne	$v6netcologne " | tee -a $HOME/bench.log
 	echo "" | tee -a $HOME/bench.log
 	echo "" | tee -a $HOME/bench.log
 }
@@ -165,7 +196,7 @@ gbench () {
         gb_dl=$(wget -qO - $gb_page | \
                  sed -n 's/.*\(https\?:[^:]*\.tar\.gz\).*/\1/p')
         gb_noext=${gb_dl##*/}
-        gb_noext=${gb_noext%.tar.gz} 
+        gb_noext=${gb_noext%.tar.gz}
         gb_name=${gb_noext//-/ }
 	echo "File is located at $gb_dl" | tee -a $HOME/bench.log
 	echo "Downloading and extracting $gb_name" | tee -a $HOME/bench.log
